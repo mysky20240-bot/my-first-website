@@ -566,6 +566,15 @@
     }
     .footer-bottom a { color: #9CA3AF; text-decoration: none; }
     .footer-bottom a:hover { color: var(--pink); }
+    .footer-biz {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #374151;
+      font-size: 0.75rem;
+      color: #6B7280;
+      line-height: 1.8;
+    }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
@@ -815,6 +824,144 @@
     @media (max-width: 600px) {
       #map { height: 300px; }
     }
+
+    /* ─── REVIEWS ─── */
+    #reviews { background: var(--pink-light); }
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 36px 28px;
+      border: 1.5px solid var(--pink-mid);
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .review-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(244,114,182,.2);
+    }
+    .review-stars {
+      color: #FBBF24;
+      font-size: 1.15rem;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+    }
+    .review-text {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.85;
+      flex: 1;
+      margin-bottom: 24px;
+      position: relative;
+      padding-top: 4px;
+    }
+    .review-text::before {
+      content: '\201C';
+      display: block;
+      font-size: 3.6rem;
+      line-height: .9;
+      color: var(--pink-mid);
+      font-family: Georgia, serif;
+      margin-bottom: 4px;
+    }
+    .review-footer {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--pink-light);
+    }
+    .review-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F9A8D4, #F472B6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--white);
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(244,114,182,.25);
+    }
+    .review-meta h5 {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+    .review-meta span {
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    /* ─── SCROLL ANIMATION ─── */
+    [data-anim] {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    [data-anim].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .service-grid > [data-anim]:nth-child(2),
+    .price-grid   > [data-anim]:nth-child(2),
+    .review-grid  > [data-anim]:nth-child(2),
+    .location-cards > [data-anim]:nth-child(2) { transition-delay: .13s; }
+    .service-grid > [data-anim]:nth-child(3),
+    .price-grid   > [data-anim]:nth-child(3),
+    .review-grid  > [data-anim]:nth-child(3),
+    .location-cards > [data-anim]:nth-child(3) { transition-delay: .26s; }
+
+    /* ─── 카카오톡 플로팅 버튼 ─── */
+    .kakao-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 60px;
+      height: 60px;
+      background: #FEE500;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .kakao-float:hover {
+      transform: scale(1.12);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+    .kakao-float svg {
+      width: 34px;
+      height: 34px;
+    }
+    .kakao-float-tooltip {
+      position: absolute;
+      right: 68px;
+      background: #3C1E1E;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      padding: 6px 12px;
+      border-radius: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+    .kakao-float:hover .kakao-float-tooltip {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -859,25 +1006,25 @@
 <!-- ─── SERVICES ─── -->
 <section id="services">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-anim>
       <p class="section-label">Our Services</p>
       <h2 class="section-title">특별한 서비스를<br>경험해보세요</h2>
       <p class="section-sub">고객 한 분 한 분의 개성과 스타일에 맞춘<br>프리미엄 헤어 서비스를 제공합니다.</p>
     </div>
     <div class="service-grid">
-      <div class="service-card">
+      <div class="service-card" data-anim>
         <div class="service-icon">✂️</div>
         <h3>헤어 커트 &amp; 스타일링</h3>
         <p>얼굴형과 라이프스타일을 분석해 가장 어울리는 커트를 제안합니다. 데일리룩부터 특별한 날까지 완벽하게 연출해드립니다.</p>
         <span class="service-tag">기본 ~ 60분</span>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-anim>
         <div class="service-icon">🎨</div>
         <h3>펌 &amp; 염색</h3>
         <p>최신 트렌드 컬러와 볼륨감 있는 웨이브를 전문 기술로 표현합니다. 손상 없이 건강하고 예쁜 헤어를 완성해드립니다.</p>
         <span class="service-tag">90분 ~ 3시간</span>
       </div>
-      <div class="service-card">
+      <div class="service-card" data-anim>
         <div class="service-icon">💆</div>
         <h3>두피 케어 &amp; 헤드스파</h3>
         <p>전문 두피 진단 후 맞춤 케어를 제공합니다. 깊은 이완과 집중 영양 공급으로 건강한 두피와 모발을 되찾아드립니다.</p>
@@ -890,12 +1037,12 @@
 <!-- ─── DESIGNER SLIDER ─── -->
 <section id="designers">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-anim>
       <p class="section-label">Our Designers</p>
       <h2 class="section-title">전문 디자이너를<br>소개합니다</h2>
       <p class="section-sub">풍부한 경험과 감각으로 당신만의 스타일을 완성합니다.</p>
     </div>
-    <div class="slider-wrapper">
+    <div class="slider-wrapper" data-anim>
       <!-- 트랙 -->
       <div class="slider-track" id="sliderTrack">
         <!-- 디자이너 1 -->
@@ -952,14 +1099,14 @@
 <!-- ─── PRICE ─── -->
 <section id="price">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-anim>
       <p class="section-label">Price List</p>
       <h2 class="section-title">합리적인 가격으로<br>프리미엄을 누리세요</h2>
       <p class="section-sub">모든 시술에는 샴푸 &amp; 드라이 서비스가 포함되어 있습니다.</p>
     </div>
     <div class="price-grid">
       <!-- 커트 -->
-      <div class="price-card">
+      <div class="price-card" data-anim>
         <p class="price-category">✂ Cut</p>
         <h3>헤어 커트</h3>
         <p class="price-desc">전문 디자이너가 1:1 컨설팅 후 가장 어울리는 스타일로 커트해드립니다.</p>
@@ -971,7 +1118,7 @@
         </ul>
       </div>
       <!-- 펌/염색 (인기) -->
-      <div class="price-card popular">
+      <div class="price-card popular" data-anim>
         <div class="popular-badge">BEST</div>
         <p class="price-category">🎨 Perm &amp; Color</p>
         <h3>펌 &amp; 염색</h3>
@@ -984,7 +1131,7 @@
         </ul>
       </div>
       <!-- 케어 -->
-      <div class="price-card">
+      <div class="price-card" data-anim>
         <p class="price-category">💆 Care</p>
         <h3>트리트먼트 &amp; 스파</h3>
         <p class="price-desc">두피와 모발 상태에 맞는 맞춤 케어로 건강하고 윤기 있는 머릿결을 선사합니다.</p>
@@ -999,15 +1146,65 @@
   </div>
 </section>
 
+<!-- ─── REVIEWS ─── -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-head" data-anim>
+      <p class="section-label">Reviews</p>
+      <h2 class="section-title">고객 후기</h2>
+      <p class="section-sub">HYEJIN SHOP을 다녀가신 고객님들의 생생한 후기입니다.</p>
+    </div>
+    <div class="review-grid">
+
+      <div class="review-card" data-anim>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">볼륨펌이 이렇게 자연스러울 수 있다니 감동이에요! 혜진 디자이너님이 제 얼굴형에 맞게 꼼꼼히 컨설팅해 주셔서 딱 원하던 스타일이 나왔어요. 이렇게 완벽한 결과는 처음이에요. 다음에도 꼭 올게요!</p>
+        <div class="review-footer">
+          <div class="review-avatar">민</div>
+          <div class="review-meta">
+            <h5>김민지</h5>
+            <span>2026.06.10 &middot; 볼륨펌</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card" data-anim>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">애쉬 브라운으로 염색했는데 정말 예쁘게 나왔어요. 탈색 없이도 이렇게 밝은 컬러가 되다니 깜짝 놀랐어요. 손상도 거의 없고 촉촉한 느낌이라 너무 만족스러워요. 주변 친구들한테 다 추천했습니다!</p>
+        <div class="review-footer">
+          <div class="review-avatar">서</div>
+          <div class="review-meta">
+            <h5>이서연</h5>
+            <span>2026.06.17 &middot; 애쉬 브라운 염색</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card" data-anim>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">커트 후 헤드스파까지 받았는데 두피 마사지가 정말 시원하더라고요. 전문적으로 두피 상태를 체크해 주시고 맞춤 케어를 해주셔서 믿음이 갔어요. 머릿결도 한결 가벼워진 느낌! 완전 단골이 될 것 같아요.</p>
+        <div class="review-footer">
+          <div class="review-avatar">지</div>
+          <div class="review-meta">
+            <h5>박지현</h5>
+            <span>2026.06.24 &middot; 커트 + 헤드스파</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ─── RESERVATION FORM ─── -->
 <section id="reservation">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-anim>
       <p class="section-label">Reservation</p>
       <h2 class="section-title">예약 신청</h2>
       <p class="section-sub">아래 양식을 작성해 주시면 확인 후<br>빠르게 연락드리겠습니다.</p>
     </div>
-    <form class="booking-form" id="reservationForm" onsubmit="submitReservation(event)">
+    <form class="booking-form" data-anim id="reservationForm" onsubmit="submitReservation(event)">
       <div class="form-row">
         <div class="form-group">
           <label for="resName">이름 <span class="required">*</span></label>
@@ -1071,7 +1268,7 @@
 <!-- ─── 오시는길 ─── -->
 <section id="contact" style="background:var(--white);">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-anim>
       <p class="section-label">Location</p>
       <h2 class="section-title">오시는 길</h2>
       <p class="section-sub">HYEJIN SHOP에서 여러분을 기다리고 있습니다.</p>
@@ -1093,19 +1290,19 @@
 
     <!-- 정보 카드 -->
     <div class="location-cards">
-      <div class="location-card">
+      <div class="location-card" data-anim>
         <div class="location-icon">📍</div>
         <h4>주소</h4>
         <p>서울시 강남구 테헤란로 152</p>
         <p class="sub">강남파이낸스센터 · 지하철 2호선 강남역 5번 출구</p>
       </div>
-      <div class="location-card">
+      <div class="location-card" data-anim>
         <div class="location-icon">📞</div>
         <h4>전화번호</h4>
         <p>02-1234-5678</p>
         <p class="sub">예약 문의 환영합니다</p>
       </div>
-      <div class="location-card">
+      <div class="location-card" data-anim>
         <div class="location-icon">🕐</div>
         <h4>영업시간</h4>
         <p>평일 10:00 – 20:00<br>주말 10:00 – 18:00</p>
@@ -1128,6 +1325,9 @@
       <p><strong>영업시간</strong> 평일 10:00–20:00 / 주말 10:00–18:00</p>
       <p><strong>정기 휴무</strong> 매주 화요일</p>
     </div>
+  </div>
+  <div class="footer-biz">
+    <p>상호명: 혜진샵 &nbsp;|&nbsp; 대표자: 홍길동 &nbsp;|&nbsp; 사업자등록번호: 000-00-00000 &nbsp;|&nbsp; 통신판매업 신고번호: 2026-서울강남-0000 &nbsp;|&nbsp; 이메일: hyejin@shop.com</p>
   </div>
   <div class="footer-bottom">
     <p>© 2026 Blossom Hair. All rights reserved.</p>
@@ -1197,7 +1397,35 @@
     if (e.target === e.currentTarget) closeModal();
   }
 
+  /* ── 스크롤 등장 애니메이션 ── */
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-anim]').forEach(el => animObserver.observe(el));
+
 </script>
+
+  <!-- 카카오톡 플로팅 상담 버튼 -->
+  <a class="kakao-float"
+     href="http://pf.kakao.com/_YOUR_CHANNEL_ID"
+     target="_blank"
+     rel="noopener"
+     aria-label="카카오톡 상담">
+    <span class="kakao-float-tooltip">카카오톡 상담</span>
+    <!-- 카카오톡 말풍선 아이콘 -->
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="20" cy="19" rx="16" ry="13.5" fill="#3C1E1E"/>
+      <path d="M11 26.5c.4-1.6 1-3.8 1-4.5C9.2 20.3 8 17.8 8 15c0-5.5 5.4-10 12-10s12 4.5 12 10-5.4 10-12 10c-1.1 0-2.2-.1-3.2-.4L11 26.5z" fill="#FEE500"/>
+      <rect x="14" y="17" width="2.2" height="6" rx="1.1" fill="#3C1E1E"/>
+      <rect x="18.9" y="14" width="2.2" height="9" rx="1.1" fill="#3C1E1E"/>
+      <rect x="23.8" y="17" width="2.2" height="6" rx="1.1" fill="#3C1E1E"/>
+    </svg>
+  </a>
 
 </body>
 </html>
