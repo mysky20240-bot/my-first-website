@@ -588,6 +588,146 @@
       .btn { padding: 12px 22px; font-size: 0.9rem; }
       .hero-btns { flex-direction: column; align-items: center; }
     }
+
+    /* ─── RESERVATION FORM ─── */
+    #reservation { background: var(--pink-light); }
+    .booking-form {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 28px;
+      padding: 48px 40px;
+      border: 1.5px solid var(--pink-mid);
+      box-shadow: 0 16px 48px rgba(244,114,182,.12);
+    }
+    .form-group { margin-bottom: 22px; }
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .form-group label .required { color: var(--pink-deep); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--pink-mid);
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      color: var(--dark);
+      background: var(--white);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(244,114,182,.15);
+    }
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23DB2777' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: #FEE500;
+      color: #1a1a1a;
+      font-size: 1rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 8px 24px rgba(254,229,0,.45);
+      transition: all .2s;
+      letter-spacing: 0.5px;
+    }
+    .btn-submit:hover {
+      background: #e6ce00;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(254,229,0,.6);
+    }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.show { display: flex; }
+    .modal-box {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      animation: modalPop .35s cubic-bezier(.34,1.56,.64,1);
+      border: 2px solid var(--pink-mid);
+      box-shadow: 0 24px 64px rgba(244,114,182,.25);
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(.85) translateY(20px); }
+      to   { opacity: 1; transform: scale(1)  translateY(0); }
+    }
+    .modal-icon { font-size: 3rem; margin-bottom: 16px; }
+    .modal-box h3 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .modal-box p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .btn-modal-close {
+      background: #FEE500;
+      color: #1a1a1a;
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 13px 36px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(254,229,0,.45);
+      transition: all .2s;
+    }
+    .btn-modal-close:hover {
+      background: #e6ce00;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 600px) {
+      .booking-form { padding: 36px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -600,7 +740,7 @@
       <li><a href="#services">서비스</a></li>
       <li><a href="#price">가격표</a></li>
       <li><a href="#contact">오시는길</a></li>
-      <li><a href="#kakao" class="nav-cta">상담 예약</a></li>
+      <li><a href="#reservation" class="nav-cta">예약 신청</a></li>
     </ul>
     <div class="hamburger" onclick="toggleMenu()" aria-label="메뉴">
       <span></span><span></span><span></span>
@@ -610,6 +750,7 @@
     <a href="#services" onclick="toggleMenu()">서비스 소개</a>
     <a href="#price" onclick="toggleMenu()">가격표</a>
     <a href="#contact" onclick="toggleMenu()">오시는길</a>
+    <a href="#reservation" onclick="toggleMenu()">예약 신청</a>
     <a href="#kakao" onclick="toggleMenu()">카카오톡 상담</a>
   </div>
 </nav>
@@ -771,6 +912,63 @@
   </div>
 </section>
 
+<!-- ─── RESERVATION FORM ─── -->
+<section id="reservation">
+  <div class="container">
+    <div class="section-head">
+      <p class="section-label">Reservation</p>
+      <h2 class="section-title">예약 신청</h2>
+      <p class="section-sub">아래 양식을 작성해 주시면 확인 후<br>빠르게 연락드리겠습니다.</p>
+    </div>
+    <form class="booking-form" id="reservationForm" onsubmit="submitReservation(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="resName">이름 <span class="required">*</span></label>
+          <input type="text" id="resName" name="name" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+          <label for="resPhone">연락처 <span class="required">*</span></label>
+          <input type="tel" id="resPhone" name="phone" placeholder="010-0000-0000" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="resService">원하는 서비스 <span class="required">*</span></label>
+          <select id="resService" name="service" required>
+            <option value="" disabled selected>서비스를 선택하세요</option>
+            <option value="cut">헤어 커트 &amp; 스타일링</option>
+            <option value="perm">펌</option>
+            <option value="color">염색 &amp; 탈색</option>
+            <option value="perm-color">펌 + 염색</option>
+            <option value="treatment">트리트먼트</option>
+            <option value="spa">두피 케어 &amp; 헤드스파</option>
+            <option value="other">기타 문의</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="resDate">희망 날짜 <span class="required">*</span></label>
+          <input type="date" id="resDate" name="date" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="resMessage">요청사항</label>
+        <textarea id="resMessage" name="message" placeholder="원하시는 스타일이나 추가 요청사항을 자유롭게 적어주세요 😊"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">✨ 예약 신청하기</button>
+    </form>
+  </div>
+</section>
+
+<!-- ─── RESERVATION MODAL ─── -->
+<div class="modal-overlay" id="reservationModal" onclick="handleModalClick(event)">
+  <div class="modal-box">
+    <div class="modal-icon">🌸</div>
+    <h3>예약 완료!</h3>
+    <p>예약 신청이 완료되었습니다.<br>확인 후 빠르게 연락드리겠습니다.<br>감사합니다 💗</p>
+    <button class="btn-modal-close" onclick="closeModal()">확인</button>
+  </div>
+</div>
+
 <!-- ─── KAKAO CTA ─── -->
 <div class="cta-section" id="kakao">
   <p class="section-label" style="display:block; margin-bottom:12px;">Reservation</p>
@@ -847,6 +1045,23 @@
       document.getElementById('mobileMenu').classList.remove('open');
     }
   });
+
+  /* ── 예약 폼 ── */
+  document.getElementById('resDate').min = new Date().toISOString().split('T')[0];
+
+  function submitReservation(e) {
+    e.preventDefault();
+    document.getElementById('reservationModal').classList.add('show');
+    e.target.reset();
+  }
+
+  function closeModal() {
+    document.getElementById('reservationModal').classList.remove('show');
+  }
+
+  function handleModalClick(e) {
+    if (e.target === e.currentTarget) closeModal();
+  }
 </script>
 
 </body>
