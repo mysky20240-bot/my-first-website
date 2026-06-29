@@ -728,6 +728,93 @@
       .booking-form { padding: 36px 24px; }
       .form-row { grid-template-columns: 1fr; }
     }
+
+    /* ─── 오시는길 ─── */
+    #contact-section { background: var(--white); }
+    .map-wrap {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid var(--pink-mid);
+      box-shadow: 0 12px 40px rgba(244,114,182,.15);
+      margin-bottom: 40px;
+    }
+    #map { width: 100%; height: 420px; }
+    .map-fallback {
+      width: 100%;
+      height: 420px;
+      background: var(--pink-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: var(--gray);
+    }
+    .map-fallback .map-pin { font-size: 3rem; }
+    .map-fallback p { font-size: 0.9rem; }
+    .map-fallback a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--pink);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .map-fallback a:hover { background: var(--pink-deep); transform: translateY(-2px); }
+    .location-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .location-card {
+      background: var(--pink-light);
+      border-radius: 20px;
+      padding: 28px 24px;
+      border: 1.5px solid var(--pink-mid);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .location-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(244,114,182,.18);
+    }
+    .location-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, #F9A8D4, #F472B6);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(244,114,182,.3);
+    }
+    .location-card h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pink-deep);
+      margin-bottom: 8px;
+    }
+    .location-card p {
+      font-size: 0.9rem;
+      color: var(--dark);
+      line-height: 1.75;
+      font-weight: 500;
+    }
+    .location-card .sub {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+    @media (max-width: 600px) {
+      #map { height: 300px; }
+    }
   </style>
 </head>
 <body>
@@ -981,15 +1068,62 @@
   <p class="cta-note">평일 10:00 – 20:00 · 주말 10:00 – 18:00 운영</p>
 </div>
 
+<!-- ─── 오시는길 ─── -->
+<section id="contact" style="background:var(--white);">
+  <div class="container">
+    <div class="section-head">
+      <p class="section-label">Location</p>
+      <h2 class="section-title">오시는 길</h2>
+      <p class="section-sub">HYEJIN SHOP에서 여러분을 기다리고 있습니다.</p>
+    </div>
+
+    <!-- 구글맵 -->
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps?q=서울시+강남구+테헤란로+152+강남파이낸스센터&output=embed&hl=ko"
+        width="100%"
+        height="420"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="HYEJIN SHOP 위치">
+      </iframe>
+    </div>
+
+    <!-- 정보 카드 -->
+    <div class="location-cards">
+      <div class="location-card">
+        <div class="location-icon">📍</div>
+        <h4>주소</h4>
+        <p>서울시 강남구 테헤란로 152</p>
+        <p class="sub">강남파이낸스센터 · 지하철 2호선 강남역 5번 출구</p>
+      </div>
+      <div class="location-card">
+        <div class="location-icon">📞</div>
+        <h4>전화번호</h4>
+        <p>02-1234-5678</p>
+        <p class="sub">예약 문의 환영합니다</p>
+      </div>
+      <div class="location-card">
+        <div class="location-icon">🕐</div>
+        <h4>영업시간</h4>
+        <p>평일 10:00 – 20:00<br>주말 10:00 – 18:00</p>
+        <p class="sub">정기 휴무: 매주 화요일</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── FOOTER ─── -->
-<footer id="contact">
+<footer>
   <div class="footer-inner">
     <div class="footer-brand">
       <a href="#" class="logo">HYEJIN <span>SHOP</span></a>
       <p>트렌드와 개성 사이, 당신만의 스타일을<br>함께 만들어갑니다.</p>
     </div>
     <div class="footer-info">
-      <p><strong>주소</strong> 서울특별시 마포구 홍익로 123<br>블라썸빌딩 2층</p>
+      <p><strong>주소</strong> 서울시 강남구 테헤란로 152<br>강남파이낸스센터</p>
       <p style="margin-top:12px;"><strong>전화</strong> 02-1234-5678</p>
       <p><strong>영업시간</strong> 평일 10:00–20:00 / 주말 10:00–18:00</p>
       <p><strong>정기 휴무</strong> 매주 화요일</p>
@@ -1062,6 +1196,7 @@
   function handleModalClick(e) {
     if (e.target === e.currentTarget) closeModal();
   }
+
 </script>
 
 </body>
